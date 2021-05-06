@@ -271,4 +271,4 @@ rimbaud/media/
 
 .pytest_cache/
 
-
+.vscode
