@@ -10,11 +10,11 @@ let ajax_call = function (endpoint, request_parameters) {
     $.getJSON(endpoint, request_parameters)
     .done(response => {
         // fade out the articles_div, then:
-            articles_div.fadeTo('fast', 0).promise().then(() => {
+            articles_div.fadeTo('slow', 0).promise().then(() => {
                 // replace the HTML contents
                 articles_div.html(response['html_from_view'])
                 // fade-in the div with new contents
-                articles_div.fadeTo('fast', 1)
+                articles_div.fadeTo('slow', 1)
                 // stop animating search icon
                 search_icon.removeClass('blink')
             })

@@ -7,26 +7,41 @@ from .models import Article
 
 
 def index(request):
-    latest_article_list = Article.objects.filter(
-        visibility=True,
-        pub_date__gt=datetime.now()
-    ).order_by('-pub_date')
+    if request.user.is_superuser:
+        latest_article_list = Article.objects.filter(pub_date__gt=datetime.now()).order_by('-pub_date')
+    else:
+        latest_article_list = Article.objects.filter(
+            visibility=True,
+            pub_date__gt=datetime.now()
+        ).order_by('-pub_date')
 
     if request.is_ajax():
         url_parameter = request.GET.get("q")
 
         if url_parameter.isnumeric():
-            latest_article_list = Article.objects.all().filter(
-                pk__startswith=url_parameter,
-                visibility=True,
-                pub_date__gt=datetime.now()
-            )
+            if request.user.is_superuser:
+                latest_article_list = Article.objects.all().filter(
+                    pk__startswith=url_parameter,
+                    pub_date__gt=datetime.now()
+                )
+            else:
+                latest_article_list = Article.objects.all().filter(
+                    pk__startswith=url_parameter,
+                    visibility=True,
+                    pub_date__gt=datetime.now()
+                )
         else:
-            latest_article_list = Article.objects.all().filter(
-                title__icontains=url_parameter,
-                visibility=True,
-                pub_date__gt=datetime.now()
-            )
+            if request.user.is_superuser:
+                latest_article_list = Article.objects.all().filter(
+                    title__icontains=url_parameter,
+                    pub_date__gt=datetime.now()
+                )
+            else:
+                latest_article_list = Article.objects.all().filter(
+                    title__icontains=url_parameter,
+                    visibility=True,
+                    pub_date__gt=datetime.now()
+                )
 
         html = loader.render_to_string(
             template_name="articles/_articles_results.html",
@@ -41,10 +56,17 @@ def index(request):
 
 
 def detail(request, article_id):
-    article = get_object_or_404(
-        Article,
-        pk=article_id,
-        visibility=True,
-        pub_date__gt=datetime.now()
-    )
+    if request.user.is_superuser:
+        article = get_object_or_404(
+                Article,
+                pk=article_id,
+                pub_date__gt=datetime.now()
+            )
+    else:
+        article = get_object_or_404(
+                Article,
+                pk=article_id,
+                visibility=True,
+                pub_date__gt=datetime.now()
+            )
     return render(request, 'articles/detail.html', {'article': article})
