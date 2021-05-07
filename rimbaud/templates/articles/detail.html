@@ -1,7 +1,33 @@
-<div class="card">
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Article: {{ article.title }}{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="card">
     <div class="card-body">
         <h2 class="card-title"><a href="/articles/{{ article.id }}/">{{ article.title }}</a></h2>
         <h4 class="card-subtitle mb-2">{{ article.desc }}</h6>
         <p class="card-text text-justify">{{ article.article }}</p>
     </div>
+    </div>
 </div>
+
+
+{% if article == request.user %}
+<!-- Action buttons -->
+<div class="row">
+
+  <div class="col-sm-12">
+    <a class="btn btn-primary" href="{% url 'users:update' %}" role="button">My Info</a>
+    <a class="btn btn-primary" href="{% url 'account_email' %}" role="button">E-Mail</a>
+    <!-- Your Stuff: Custom user template urls -->
+  </div>
+
+</div>
+<!-- End Action buttons -->
+{% endif %}
+
+</div>
+{% endblock content %}

@@ -1,32 +1,24 @@
-<!DOCTYPE html>
-<html>
+{% extends "base.html" %}
+{% load static %}
 
-<head>
-    <meta charset="utf-8">
-    <title>Articles</title>
-</head>
+{% block title %}Articles{% endblock %}
 
-<body>
-    {% if liste_articles %}
-    <ul>
-        <div class="span6">
-            {% for article in liste_articles %}
+{% block content %}
+<div class="container">
+    {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
-            {% include "articles/detail.html" with article=article only %}
-
-            <!-- <div class="card h-50 mw-50">
-                <div class="card-body">
-                    <h2 class="card-title"><a href="/articles/{{ article.id }}/">{{ article.title }}</a></h2>
-                    <h4 class="card-subtitle mb-2">{{ article.desc }}</h6>
-                    <p class="card-text text-justify">{{ article.article }}</p>
-                </div>
-            </div> -->
-            {% endfor %}
+   <div class="row">
+        {# icon and search-box #}
+        <div class="col-6 align-left">
+            <i id="search-icon" class="fas fa-search"></i>
+            <input id="user-input" placeholder="Search">
         </div>
-    </ul>
-    {% else %}
-    <p>No articles are available.</p>
-    {% endif %}
-</body>
 
-</html>
+        {# artist-list section #}
+        <div id="replaceable-content" class="col-6">
+            {% include 'articles/_articles_results.html' %}
+        </div>
+
+    </div>
+</div>
+{% endblock content %}
