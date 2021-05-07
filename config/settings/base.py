@@ -64,7 +64,6 @@ WSGI_APPLICATION = "config.wsgi.application"
 # APPS
 # ------------------------------------------------------------------------------
 DJANGO_APPS = [
-    'articles.apps.ArticlesConfig',
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
@@ -84,6 +83,7 @@ THIRD_PARTY_APPS = [
 
 LOCAL_APPS = [
     "rimbaud.users.apps.UsersConfig",
+    "rimbaud.articles.apps.ArticlesConfig",
     # Your stuff: custom apps go here
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
