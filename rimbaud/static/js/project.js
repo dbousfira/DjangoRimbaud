@@ -1,9 +1,8 @@
 /* Project specific Javascript goes here. */
 const user_input = $("#user-input")
-const search_icon = $('#search-icon')
 const articles_div = $('#replaceable-content')
 const endpoint = '/articles/'
-const delay_by_in_ms = 700
+const delay_by_in_ms = 350
 let scheduled_function = false
 
 let ajax_call = function (endpoint, request_parameters) {
@@ -15,8 +14,6 @@ let ajax_call = function (endpoint, request_parameters) {
                 articles_div.html(response['html_from_view'])
                 // fade-in the div with new contents
                 articles_div.fadeTo('slow', 1)
-                // stop animating search icon
-                search_icon.removeClass('blink')
             })
         })
 }
@@ -27,9 +24,6 @@ user_input.on('keyup', function () {
     const request_parameters = {
         q: $(this).val() // value of user_input: the HTML element with ID user-input
     }
-
-    // start animating the search icon with the CSS class
-    search_icon.addClass('blink')
 
     // if scheduled_function is NOT false, cancel the execution of the function
     if (scheduled_function) {
