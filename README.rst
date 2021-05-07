@@ -22,6 +22,19 @@ Moved to settings_.
 Basic Commands
 --------------
 
+1. Clone the repo
+```sh
+git clone https://github.com/dbousfira/rimbaud.git
+```
+2. Modify a .env file at the root
+```
+ENGINE=""
+NAME=""
+USER=""
+PASSWORD=""
+HOST=""
+```
+
 Setting Up Your Users
 ^^^^^^^^^^^^^^^^^^^^^
 
