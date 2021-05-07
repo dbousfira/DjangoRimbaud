@@ -1,18 +1,24 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>Articles</title>
-  </head>
-  <body>
-    {% if latest_article_list %}
-    <ul>
-    {% for article in latest_article_list %}
-        <li><a href="/articles/{{ article.id }}/">{{ article.article }}</a></li>
-    {% endfor %}
-    </ul>
-    {% else %}
-        <p>No articles are available.</p>
-    {% endif %}
-  </body>
-</html>
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Articles{% endblock %}
+
+{% block content %}
+<div class="container">
+    {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+   <div class="row">
+        {# icon and search-box #}
+        <div class="col-6 align-left">
+            <i id="search-icon" class="fas fa-search"></i>
+            <input id="user-input" placeholder="Search">
+        </div>
+
+        {# artist-list section #}
+        <div id="replaceable-content" class="col-6">
+            {% include 'articles/_articles_results.html' %}
+        </div>
+
+    </div>
+</div>
+{% endblock content %}
