@@ -85,6 +85,7 @@ LOCAL_APPS = [
     "rimbaud.users.apps.UsersConfig",
     "rimbaud.articles.apps.ArticlesConfig",
     # Your stuff: custom apps go here
+    "rimbaud"
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS

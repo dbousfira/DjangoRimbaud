@@ -7,6 +7,3 @@ class Article(models.Model):
     article = models.TextField(max_length=5000)
     pub_date = models.DateTimeField('date published')
     visibility = models.BooleanField()
-
-    # class Meta:
-    #     app_label = 'rimbaud'
