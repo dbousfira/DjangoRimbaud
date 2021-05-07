@@ -17,7 +17,10 @@ def index(request):
     if request.is_ajax():
         url_parameter = request.GET.get("q")
 
-        latest_article_list = Article.objects.all().filter(pk__startswith=url_parameter)
+        if url_parameter.isnumeric():
+            latest_article_list = Article.objects.all().filter(pk__startswith=url_parameter, visibility=True)
+        else:
+            latest_article_list = Article.objects.all().filter(title__icontains=url_parameter, visibility=True)
 
         html = loader.render_to_string(
             template_name="articles/_articles_results.html",
@@ -34,8 +37,3 @@ def index(request):
 def detail(request, article_id):
     article = get_object_or_404(Article, pk=article_id)
     return render(request, 'articles/detail.html', {'article': article})
-
-
-def results(request, article_id):
-    response = "You're looking at the results of article %s."
-    return HttpResponse(response % article_id)
