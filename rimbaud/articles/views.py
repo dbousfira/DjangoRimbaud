@@ -15,11 +15,19 @@ def index(request):
     if request.is_ajax():
         url_parameter = request.GET.get("q")
 
-        latest_article_list = Article.objects.all().filter(
-            pk__startswith=url_parameter,
-            visibility=True,
-            pub_date__gt=datetime.now()
-        )
+        if url_parameter.isnumeric():
+            latest_article_list = Article.objects.all().filter(
+                pk__startswith=url_parameter,
+                visibility=True,
+                pub_date__gt=datetime.now()
+            )
+        else:
+            latest_article_list = Article.objects.all().filter(
+                title__icontains=url_parameter,
+                visibility=True,
+                pub_date__gt=datetime.now()
+            )
+
         html = loader.render_to_string(
             template_name="articles/_articles_results.html",
             context={"latest_article_list": latest_article_list}
