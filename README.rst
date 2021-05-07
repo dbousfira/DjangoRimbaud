@@ -12,13 +12,6 @@ Un écrivain veut se mettre au numérique et vous demande de lui réaliser une a
 
 :License: MIT
 
-Settings
---------
-
-Moved to settings_.
-
-.. _settings: http://cookiecutter-django.readthedocs.io/en/latest/settings.html
-
 Basic Commands
 --------------
 
@@ -26,14 +19,15 @@ Basic Commands
 ::
     git clone https://github.com/dbousfira/rimbaud.git
 
+
 2. Modify a .env file at the root
-```
-ENGINE=""
-NAME=""
-USER=""
-PASSWORD=""
-HOST=""
-```
+
+3. Install requirements/local.txt with your favorite environment handler.
+
+4. To launch app: 
+:: 
+    python manage.py runserver
+
 
 Setting Up Your Users
 ^^^^^^^^^^^^^^^^^^^^^
